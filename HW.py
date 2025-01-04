@@ -5,24 +5,9 @@ class Person:
             total_grades.extend(grades)
         return sum(total_grades) / len(total_grades) if total_grades else 0
 
-    def __lt__(self, other):
-        if isinstance(other, Person):
-            return self.get_average_grade() < other.get_average_grade()
-        return False
-
-    def __le__(self, other):
-        if isinstance(other, Person):
-            return self.get_average_grade() <= other.get_average_grade()
-        return False
-
     def __eq__(self, other):
         if isinstance(other, Person):
             return self.get_average_grade() == other.get_average_grade()
-        return False
-
-    def __ne__(self, other):
-        if isinstance(other, Person):
-            return self.get_average_grade() != other.get_average_grade()
         return False
 
     def __gt__(self, other):
@@ -30,9 +15,9 @@ class Person:
             return self.get_average_grade() > other.get_average_grade()
         return False
 
-    def __ge__(self, other):
+    def __lt__(self, other):
         if isinstance(other, Person):
-            return self.get_average_grade() >= other.get_average_grade()
+            return self.get_average_grade() < other.get_average_grade()
         return False
 
 
