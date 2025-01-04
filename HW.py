@@ -1,4 +1,42 @@
-class Mentor:
+class Person:
+    def get_average_grade(self):
+        total_grades = []
+        for course, grades in self.grades.items():
+            total_grades.extend(grades)
+        return sum(total_grades) / len(total_grades) if total_grades else 0
+
+    def __lt__(self, other):
+        if isinstance(other, Person):
+            return self.get_average_grade() < other.get_average_grade()
+        return False
+
+    def __le__(self, other):
+        if isinstance(other, Person):
+            return self.get_average_grade() <= other.get_average_grade()
+        return False
+
+    def __eq__(self, other):
+        if isinstance(other, Person):
+            return self.get_average_grade() == other.get_average_grade()
+        return False
+
+    def __ne__(self, other):
+        if isinstance(other, Person):
+            return self.get_average_grade() != other.get_average_grade()
+        return False
+
+    def __gt__(self, other):
+        if isinstance(other, Person):
+            return self.get_average_grade() > other.get_average_grade()
+        return False
+
+    def __ge__(self, other):
+        if isinstance(other, Person):
+            return self.get_average_grade() >= other.get_average_grade()
+        return False
+
+
+class Mentor(Person):
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
@@ -13,38 +51,8 @@ class Mentor:
         else:
             return 'Ошибка'
 
-    def __lt__(self, other):
-        if isinstance(other, Mentor):
-            return self.get_average_grade() < other.get_average_grade()
-        return False
 
-    def __le__(self, other):
-        if isinstance(other, Mentor):
-            return self.get_average_grade() <= other.get_average_grade()
-        return False
-
-    def __eq__(self, other):
-        if isinstance(other, Mentor):
-            return self.get_average_grade() == other.get_average_grade()
-        return False
-
-    def __ne__(self, other):
-        if isinstance(other, Mentor):
-            return self.get_average_grade() != other.get_average_grade()
-        return False
-
-    def __gt__(self, other):
-        if isinstance(other, Mentor):
-            return self.get_average_grade() > other.get_average_grade()
-        return False
-
-    def __ge__(self, other):
-        if isinstance(other, Mentor):
-            return self.get_average_grade() >= other.get_average_grade()
-        return False
-
-
-class Student:
+class Student(Person):
     def __init__(self, name, surname, gender):
         self.name = name
         self.surname = surname
@@ -52,12 +60,6 @@ class Student:
         self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
-
-    def get_average_grade(self):
-        total_grades = []
-        for course, grades in self.grades.items():
-            total_grades.extend(grades)
-        return sum(total_grades) / len(total_grades) if total_grades else 0
 
     def __str__(self):
         avg_grade = self.get_average_grade()
@@ -69,83 +71,17 @@ class Student:
                 f"Курсы в процессе изучения: {courses_in_progress}\n"
                 f"Завершенные курсы: {finished_courses}")
 
-    def __lt__(self, other):
-        if isinstance(other, Student):
-            return self.get_average_grade() < other.get_average_grade()
-        return False
-
-    def __le__(self, other):
-        if isinstance(other, Student):
-            return self.get_average_grade() <= other.get_average_grade()
-        return False
-
-    def __eq__(self, other):
-        if isinstance(other, Student):
-            return self.get_average_grade() == other.get_average_grade()
-        return False
-
-    def __ne__(self, other):
-        if isinstance(other, Student):
-            return self.get_average_grade() != other.get_average_grade()
-        return False
-
-    def __gt__(self, other):
-        if isinstance(other, Student):
-            return self.get_average_grade() > other.get_average_grade()
-        return False
-
-    def __ge__(self, other):
-        if isinstance(other, Student):
-            return self.get_average_grade() >= other.get_average_grade()
-        return False
-
 
 class Lecturer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
         self.grades = {}
 
-    def get_average_grade(self):
-        total_grades = []
-        for course, grades in self.grades.items():
-            total_grades.extend(grades)
-        return sum(total_grades) / len(total_grades) if total_grades else 0
-
     def __str__(self):
         avg_grade = self.get_average_grade()
         return (f"Имя: {self.name}\n"
                 f"Фамилия: {self.surname}\n"
                 f"Средняя оценка за лекции: {avg_grade:.1f}")
-
-    def __lt__(self, other):
-        if isinstance(other, Lecturer):
-            return self.get_average_grade() < other.get_average_grade()
-        return False
-
-    def __le__(self, other):
-        if isinstance(other, Lecturer):
-            return self.get_average_grade() <= other.get_average_grade()
-        return False
-
-    def __eq__(self, other):
-        if isinstance(other, Lecturer):
-            return self.get_average_grade() == other.get_average_grade()
-        return False
-
-    def __ne__(self, other):
-        if isinstance(other, Lecturer):
-            return self.get_average_grade() != other.get_average_grade()
-        return False
-
-    def __gt__(self, other):
-        if isinstance(other, Lecturer):
-            return self.get_average_grade() > other.get_average_grade()
-        return False
-
-    def __ge__(self, other):
-        if isinstance(other, Lecturer):
-            return self.get_average_grade() >= other.get_average_grade()
-        return False
 
 
 class Reviewer(Mentor):
